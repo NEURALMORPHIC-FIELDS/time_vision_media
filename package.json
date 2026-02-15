@@ -1,0 +1,65 @@
+{
+  "name": "timevision",
+  "version": "0.1.0",
+  "description": "Universal Streaming Hub — Cooperative Subscription Infrastructure",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "db:migrate": "node scripts/migrate.js",
+    "db:seed": "node scripts/seed.js",
+    "db:reset": "npm run db:migrate && npm run db:seed",
+    "test": "vitest",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "playwright test",
+    "lint": "eslint src/",
+    "format": "prettier --write src/",
+    "settlement:run": "tsx scripts/run-settlement.ts",
+    "settlement:preview": "tsx scripts/preview-settlement.ts"
+  },
+  "keywords": [
+    "streaming",
+    "subscription",
+    "cooperative",
+    "settlement",
+    "time-tracking",
+    "universal-hub"
+  ],
+  "author": "TimeVision Contributors",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.21.0",
+    "ws": "^8.18.0",
+    "pg": "^8.13.0",
+    "redis": "^4.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "zod": "^3.23.0",
+    "helmet": "^8.0.0",
+    "cors": "^2.8.5",
+    "morgan": "^1.10.0",
+    "node-cron": "^3.0.3",
+    "dotenv": "^16.4.0",
+    "nanoid": "^5.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "tsx": "^4.19.0",
+    "vitest": "^2.1.0",
+    "@types/express": "^5.0.0",
+    "@types/ws": "^8.5.0",
+    "@types/pg": "^8.11.0",
+    "@types/node": "^22.0.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/morgan": "^1.9.9",
+    "eslint": "^9.12.0",
+    "prettier": "^3.3.0",
+    "@playwright/test": "^1.48.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
