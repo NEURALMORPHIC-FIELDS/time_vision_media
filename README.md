@@ -472,16 +472,60 @@ Original concept and architecture by the TimeVision community
 
 ---
 
+## Origin & Intent
+
+This project is the result of a personal idea. I conceived this concept out of genuine frustration with the current state of digital media: subscription fatigue, aggressive advertising, content fragmentation, and the mental exhaustion of managing dozens of platforms just to watch something.
+
+**I am publishing this idea openly, as a gift to the community.**
+
+I do not currently have the full resources to implement this at scale. But the idea is complete — the economic model, the technical architecture, the cooperative structure, and the legal framework are all documented here in detail. What you see in this repository is not a vague concept. It is a buildable blueprint.
+
+**This is for anyone who:**
+- Has the technical capacity to build it
+- Has the financial resources to fund it
+- Has the business relationships to bring platforms on board
+- Or simply wants to contribute a piece of the puzzle
+
+The only condition is simple: **credit this repository as the origin.** That's it. The Apache 2.0 license with the NOTICE file ensures this. Build on it, improve it, fork it, launch it — just mention where it came from.
+
+If this idea resonates with you and you have the means to make it real, **do it.** The world needs fewer walled gardens and more open infrastructure.
+
+---
+
+## Brand & Domain Research
+
+The proposed brand name is **TimeVision** (or **Time Vision Media**).
+
+Domain research was conducted on February 15, 2026. Key findings:
+
+| Domain | Status | Notes |
+|--------|--------|-------|
+| `timevisionmedia.com` | Taken (abandoned) | Small agency in India, no activity since 2020. Expires Sept 2026 |
+| `tvm.tv` | Taken (for sale) | Parked on GoDaddy, never used. Negotiable price |
+| **`timevision.tv`** | **Available** | Short, memorable, perfect for media. ~15-25€/year |
+| **`timevision.eu`** | **Available** | European identity, ideal for cooperative. ~10-15€/year |
+| `timevisionmedia.eu` | Available | Full name + EU TLD |
+| `timevisionmedia.tv` | Available | Full name + media TLD |
+| `timevision.media` | Available | Descriptive new TLD |
+
+> **Recommended:** Register `timevision.tv` + `timevision.eu` immediately (~30€ total). Domain availability changes — verify before acting.
+
+Full domain research, acquisition strategies, and brand analysis: **[docs/BRAND_AND_DOMAIN.md](docs/BRAND_AND_DOMAIN.md)**
+
+---
+
 ## Acknowledgments
 
 This project was born from a simple frustration: paying for too many subscriptions, being bombarded by ads, and dealing with fragmented content discovery. The idea is that **your time should decide where your money goes** — not algorithms, not exclusive deals, not artificial barriers.
 
-TimeVision is not a company. It's an infrastructure proposal. A cooperative model that puts users and platforms on equal footing.
+TimeVision is not a company. It's an infrastructure proposal. A cooperative model that puts users and platforms on equal footing. It is published here as an open business idea for those with the capacity and interest to bring it to life.
 
-**If you believe the internet should work differently, contribute.**
+**If you believe the internet should work differently, build this.**
 
 ---
 
 <p align="center">
-  <strong>Time Vision — Your time decides where your money goes.</strong>
+  <strong>TimeVision — Your time decides where your money goes.</strong>
+  <br/>
+  <em>An open idea. For those who can make it real.</em>
 </p>
