@@ -141,7 +141,7 @@ Time Vision Media is a **frontend-only interface** with a lightweight backend fo
 ```bash
 # Clone the repository
 git clone https://github.com/NEURALMORPHIC-FIELDS/time_vision_media.git
-cd timevision
+cd time_vision_media
 
 # Copy environment config
 cp .env.example .env
@@ -214,7 +214,9 @@ HUB_COST_MARGIN=0.05
 
 ## Traffic Monitoring — The Core Engine
 
-Time Vision Media's settlement is based on **real time tracking** via a countdown API. When a user clicks to access a platform, a timer starts. The timer runs until the user returns, switches platforms, or becomes inactive.
+Time Vision Media's settlement is based on **estimated time tracking** via a countdown API. When a user clicks to access a platform, a timer starts server-side. The timer runs until the user returns, switches platforms, or becomes inactive.
+
+> **Precision note:** The countdown is a robust estimation, not exact measurement. Time Vision Media cannot observe what happens inside another platform's tab or app. The system relies on: (1) server-side timestamps at redirect, (2) client heartbeat every 60 seconds, and (3) timeout detection on missed heartbeats. On web, tab visibility and network interruptions introduce ±60s variance per session. On mobile, background execution limits add further uncertainty. Accumulated over a month, precision is ±2 hours per user — acceptable for proportional settlement, but implementers should not market this as "real-time precision tracking". See [System Design — Precision Guarantees](docs/architecture/SYSTEM_DESIGN.md#precision-guarantees) for the full accuracy table.
 
 ### Countdown Flow
 
@@ -244,7 +246,7 @@ User returns to Time Vision Media:
 | Anomaly detection | 3x median | Flagged for review |
 | Monthly volume | Statistical outlier | Excluded from settlement |
 
-> Full API documentation: [docs/api/](docs/api/)
+> Full API documentation: [docs/api/API_REFERENCE.md](docs/api/API_REFERENCE.md)
 
 ---
 
@@ -355,7 +357,7 @@ GET    /api/admin/costs            Current month costs breakdown
 GET    /api/admin/audit            Public audit data
 ```
 
-> Full API specification: [docs/api/openapi.yaml](docs/api/openapi.yaml)
+> Full API specification: [docs/api/API_REFERENCE.md](docs/api/API_REFERENCE.md)
 
 ---
 
