@@ -1,4 +1,4 @@
-# TimeVision Media — Financial Model
+# Time Vision Media — Financial Model
 
 *"Time, made visible."*
 
@@ -73,14 +73,14 @@ Break-even ≈ 12,000-15,000 users
 
 ## Platform Value Proposition
 
-A user spending 90% of their time on Netflix through TimeVision:
+A user spending 90% of their time on Netflix through Time Vision Media:
 
 ```
 Pool per user:  49.05€
 Netflix share:  49.05€ × 90% = 44.15€
 
 Netflix standard subscription: 15.99€
-Netflix via TimeVision:        44.15€
+Netflix via Time Vision Media:  44.15€
 
 Increase: +176% per user
 ```

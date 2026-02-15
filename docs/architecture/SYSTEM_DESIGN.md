@@ -1,10 +1,10 @@
-# TimeVision Media — System Design
+# Time Vision Media — System Design
 
 *"Time, made visible."*
 
 ## Overview
 
-TimeVision is a **frontend-only universal interface** for streaming platforms. It does not host, process, or distribute any media content. It provides:
+Time Vision Media is a **frontend-only universal interface** for streaming platforms. It does not host, process, or distribute any media content. It provides:
 
 1. **Unified Discovery** — aggregated catalog from all partner platforms
 2. **One-Click Redirect** — user clicks, gets redirected to the streaming platform
@@ -92,7 +92,7 @@ TimeVision is a **frontend-only universal interface** for streaming platforms. I
 
 ## Countdown Mechanism (Core IP)
 
-The countdown system is the heart of TimeVision. It tracks time without any dependency on streaming platforms.
+The countdown system is the heart of Time Vision Media. It tracks time without any dependency on streaming platforms.
 
 ### State Machine
 
@@ -158,4 +158,4 @@ Settlement calculation:
 | 100k-500k | 4 app servers + read replicas + Redis cluster | ~8,000€/month |
 | 500k-1M | Kubernetes cluster + managed services | ~15,000€/month |
 
-The architecture is intentionally simple because TimeVision does not process media. It's API calls, database queries, and WebSocket connections — not video transcoding.
+The architecture is intentionally simple because Time Vision Media does not process media. It's API calls, database queries, and WebSocket connections — not video transcoding.

@@ -1,9 +1,11 @@
 <p align="center">
-  <img src="docs/assets/timevision-logo.png" alt="TimeVision Media" width="480"/>
+  <img src="docs/assets/timevision-logo.png" alt="Time Vision Media" width="480"/>
 </p>
 
 <p align="center">
   <strong>Universal Streaming Hub — Cooperative Subscription Infrastructure</strong>
+  <br/>
+  <em>Time, made visible.</em>
 </p>
 
 <p align="center">
@@ -24,11 +26,11 @@
 
 ---
 
-## What is TimeVision?
+## What is Time Vision Media?
 
-TimeVision is an **open-source cooperative subscription infrastructure** that unifies access to multiple streaming platforms through a single premium subscription.
+Time Vision Media is an **open-source cooperative subscription infrastructure** that unifies access to multiple streaming platforms through a single premium subscription.
 
-**TimeVision does NOT stream content.** It is a frontend-only universal interface where every click redirects to the original streaming platform. It functions as a digital marketplace — you pay at the entrance, each platform runs its own business inside.
+**Time Vision Media does NOT stream content.** It is a frontend-only universal interface where every click redirects to the original streaming platform. It functions as a digital marketplace — you pay at the entrance, each platform runs its own business inside.
 
 ### Core Principles
 
@@ -47,13 +49,13 @@ TimeVision is an **open-source cooperative subscription infrastructure** that un
 ┌──────────────────────────────────────────────────────┐
 │  USER pays 50€/month → single subscription           │
 │                                                      │
-│  Opens TimeVision → sees unified catalog              │
+│  Opens Time Vision Media → sees unified catalog              │
 │  Trending, Top 10, Search across ALL platforms        │
 │                                                      │
 │  Clicks "Watch" → REDIRECTED to Netflix/MUBI/etc.    │
 │  Streaming happens 100% on their platform             │
 │                                                      │
-│  TimeVision tracks TIME via countdown API             │
+│  Time Vision Media tracks TIME via countdown API             │
 │  No data from platforms needed                        │
 │                                                      │
 │  End of month → automatic proportional settlement     │
@@ -80,7 +82,7 @@ TimeVision is an **open-source cooperative subscription infrastructure** that un
 
 ## Architecture
 
-TimeVision is a **frontend-only interface** with a lightweight backend for:
+Time Vision Media is a **frontend-only interface** with a lightweight backend for:
 - User authentication
 - Payment processing (BaaS)
 - Time tracking (countdown API)
@@ -88,7 +90,7 @@ TimeVision is a **frontend-only interface** with a lightweight backend for:
 
 ```
 ┌─────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   Client    │────▶│  TimeVision API   │────▶│  PostgreSQL     │
+│   Client    │────▶│  Time Vision API  │────▶│  PostgreSQL     │
 │  (Web/App)  │◀────│  (Node.js)       │     │  + Redis        │
 └──────┬──────┘     └────────┬─────────┘     └─────────────────┘
        │                     │
@@ -212,7 +214,7 @@ HUB_COST_MARGIN=0.05
 
 ## Traffic Monitoring — The Core Engine
 
-TimeVision's settlement is based on **real time tracking** via a countdown API. When a user clicks to access a platform, a timer starts. The timer runs until the user returns, switches platforms, or becomes inactive.
+Time Vision Media's settlement is based on **real time tracking** via a countdown API. When a user clicks to access a platform, a timer starts. The timer runs until the user returns, switches platforms, or becomes inactive.
 
 ### Countdown Flow
 
@@ -226,7 +228,7 @@ Every 60 seconds:
   → POST /api/session/heartbeat { session_id }
   → Server confirms session is alive
 
-User returns to TimeVision:
+User returns to Time Vision Media:
   → POST /api/session/stop { session_id, reason: "return" }
   → Duration calculated and stored
   → Settlement pool updated in real-time
@@ -432,7 +434,7 @@ timevision/
 
 ## Contributing
 
-We welcome contributions from everyone. TimeVision is a community-driven project.
+We welcome contributions from everyone. Time Vision Media is a community-driven project.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
@@ -463,9 +465,9 @@ This project is licensed under the **Apache License 2.0** — see the [LICENSE](
 **Attribution Requirement**: If you use this project, its architecture, financial model, or any derivative work, you must provide clear attribution to the original repository:
 
 ```
-Based on TimeVision — Universal Streaming Hub
+Based on Time Vision Media — "Time, made visible."
 https://github.com/NEURALMORPHIC-FIELDS/time_vision_media
-Original concept and architecture by the TimeVision community
+Original concept and architecture by the Time Vision Media community
 ```
 
 ---
@@ -492,7 +494,7 @@ If this idea resonates with you and you have the means to make it real, **do it.
 
 ## Brand & Domain Research
 
-The proposed brand name is **TimeVision** (or **Time Vision Media**).
+The official brand name is **Time Vision Media**.
 
 Domain research was conducted on February 15, 2026. Key findings:
 
@@ -516,14 +518,14 @@ Full domain research, acquisition strategies, and brand analysis: **[docs/BRAND_
 
 This project was born from a simple frustration: paying for too many subscriptions, being bombarded by ads, and dealing with fragmented content discovery. The idea is that **your time should decide where your money goes** — not algorithms, not exclusive deals, not artificial barriers.
 
-TimeVision is not a company. It's an infrastructure proposal. A cooperative model that puts users and platforms on equal footing. It is published here as an open business idea for those with the capacity and interest to bring it to life.
+Time Vision Media is not a company. It's an infrastructure proposal. A cooperative model that puts users and platforms on equal footing. It is published here as an open business idea for those with the capacity and interest to bring it to life.
 
 **If you believe the internet should work differently, build this.**
 
 ---
 
 <p align="center">
-  <img src="docs/assets/timevision-logo.png" alt="TimeVision Media" width="320"/>
+  <img src="docs/assets/timevision-logo.png" alt="Time Vision Media" width="320"/>
   <br/><br/>
   <strong>Time, made visible.</strong>
   <br/>

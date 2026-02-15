@@ -6,7 +6,7 @@ import { config } from '../config/app.js';
 // ============================================================
 // SESSION MANAGER — The Countdown Engine
 // ============================================================
-// This is the core of TimeVision's traffic monitoring.
+// This is the core of Time Vision Media's traffic monitoring.
 //
 // When a user clicks to access a streaming platform:
 // 1. A session starts (timer begins)

@@ -1,7 +1,7 @@
 -- ============================================================
--- TimeVision — Initial Database Schema
+-- Time Vision Media — Initial Database Schema
 -- ============================================================
--- This is the complete database schema for the TimeVision
+-- This is the complete database schema for the Time Vision Media
 -- cooperative subscription infrastructure.
 --
 -- Core tables:

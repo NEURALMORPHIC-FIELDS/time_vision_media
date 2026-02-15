@@ -92,6 +92,6 @@ async function bootstrap() {
 }
 
 bootstrap().catch((err) => {
-  console.error('Failed to start TimeVision:', err);
+  console.error('Failed to start Time Vision Media:', err);
   process.exit(1);
 });

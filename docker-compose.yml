@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   # ─────────────────────────────────────
-  # TimeVision API Server
+  # Time Vision Media API Server
   # ─────────────────────────────────────
   app:
     build:

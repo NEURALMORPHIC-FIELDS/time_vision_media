@@ -35,7 +35,7 @@ router.get('/trending', async (req, res) => {
 router.get('/top', async (req, res) => {
   const country = (req.query.country as string) || 'US';
 
-  // Top 10 based on actual viewing time on TimeVision
+  // Top 10 based on actual viewing time on Time Vision Media
   const result = await query(
     `SELECT c.id, c.title, c.content_type, c.poster_url, c.rating,
             COUNT(vs.id) as session_count,

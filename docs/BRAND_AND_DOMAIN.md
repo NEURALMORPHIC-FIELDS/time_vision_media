@@ -1,12 +1,12 @@
-# TimeVision Media — Brand & Domain Research
+# Time Vision Media — Brand & Domain Research
 
 <p align="center">
-  <img src="assets/timevision-logo.png" alt="TimeVision Media" width="480"/>
+  <img src="assets/timevision-logo.png" alt="Time Vision Media" width="480"/>
 </p>
 
 ## Brand Identity
 
-**Name:** TimeVision Media
+**Name:** Time Vision Media
 
 **Tagline:** *"Time, made visible."*
 

@@ -1,7 +1,7 @@
 {
   "name": "timevision-media",
   "version": "0.1.0",
-  "description": "TimeVision Media — Time, made visible. Universal Streaming Hub.",
+  "description": "Time Vision Media — Time, made visible. Universal Streaming Hub.",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -27,7 +27,7 @@
     "time-tracking",
     "universal-hub"
   ],
-  "author": "TimeVision Contributors",
+  "author": "Time Vision Media Contributors",
   "license": "Apache-2.0",
   "dependencies": {
     "express": "^4.21.0",

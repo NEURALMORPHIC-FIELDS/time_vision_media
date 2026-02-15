@@ -1,6 +1,6 @@
-# Contributing to TimeVision
+# Contributing to Time Vision Media
 
-Thank you for your interest in contributing to TimeVision. This project is open-source and community-driven.
+Thank you for your interest in contributing to Time Vision Media. This project is open-source and community-driven.
 
 ## How to Contribute
 
@@ -85,7 +85,7 @@ test: add unit tests for AnomalyDetector
 
 When contributing, keep these principles in mind:
 
-1. **TimeVision does NOT stream content** — it only redirects
+1. **Time Vision Media does NOT stream content** — it only redirects
 2. **Zero dependency on platforms** — tracking is 100% client-side countdown
 3. **Transparency first** — all costs must be auditable
 4. **Neutrality** — no algorithmic favoritism
