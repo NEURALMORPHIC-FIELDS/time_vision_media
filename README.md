@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="docs/assets/timevision-logo.svg" alt="TimeVision" width="200"/>
+  <img src="docs/assets/timevision-logo.png" alt="TimeVision Media" width="480"/>
 </p>
-
-<h1 align="center">TimeVision</h1>
 
 <p align="center">
   <strong>Universal Streaming Hub — Cooperative Subscription Infrastructure</strong>
@@ -525,7 +523,9 @@ TimeVision is not a company. It's an infrastructure proposal. A cooperative mode
 ---
 
 <p align="center">
-  <strong>TimeVision — Your time decides where your money goes.</strong>
+  <img src="docs/assets/timevision-logo.png" alt="TimeVision Media" width="320"/>
+  <br/><br/>
+  <strong>Time, made visible.</strong>
   <br/>
   <em>An open idea. For those who can make it real.</em>
 </p>

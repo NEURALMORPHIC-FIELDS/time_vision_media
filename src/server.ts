@@ -81,7 +81,7 @@ async function bootstrap() {
 ║    ╚████╔╝ ██║███████║██║╚██████╔╝██║ ╚████║    ║
 ║     ╚═══╝  ╚═╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ║
 ║                                                  ║
-║   Your time decides where your money goes.       ║
+║   Time, made visible.                            ║
 ║                                                  ║
 ║   Server running on port ${config.port}                  ║
 ║   Environment: ${config.nodeEnv}                      ║

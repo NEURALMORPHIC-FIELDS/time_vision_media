@@ -1,4 +1,6 @@
-# TimeVision — Financial Model
+# TimeVision Media — Financial Model
+
+*"Time, made visible."*
 
 ## Core Formula
 

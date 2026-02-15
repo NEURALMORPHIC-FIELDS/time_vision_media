@@ -1,4 +1,6 @@
-# TimeVision — System Design
+# TimeVision Media — System Design
+
+*"Time, made visible."*
 
 ## Overview
 

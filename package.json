@@ -1,7 +1,7 @@
 {
-  "name": "timevision",
+  "name": "timevision-media",
   "version": "0.1.0",
-  "description": "Universal Streaming Hub — Cooperative Subscription Infrastructure",
+  "description": "TimeVision Media — Time, made visible. Universal Streaming Hub.",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",

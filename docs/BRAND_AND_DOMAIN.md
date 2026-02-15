@@ -1,8 +1,16 @@
-# TimeVision — Brand & Domain Research
+# TimeVision Media — Brand & Domain Research
 
-## Proposed Brand Name
+<p align="center">
+  <img src="assets/timevision-logo.png" alt="TimeVision Media" width="480"/>
+</p>
 
-**TimeVision** (or **Time Vision Media**)
+## Brand Identity
+
+**Name:** TimeVision Media
+
+**Tagline:** *"Time, made visible."*
+
+**Logo:** Clock-lens hybrid — a clock face merged with a camera lens aperture, symbolizing the fusion of time tracking and media viewing. Gold/orange clock hands over a blue-silver lens core.
 
 The name operates on three semantic levels:
 
@@ -12,9 +20,18 @@ The name operates on three semantic levels:
 | **Vision** | Viewing / watching content | A new vision for how media works |
 | **Media** | The industry | The medium of exchange |
 
-**Tagline:** *"Your time decides where your money goes."*
-
 **Acronym:** TVM — clean, works for app icons, stock tickers, branding.
+
+**Color Palette (from logo):**
+
+| Element | Color | Hex (approximate) |
+|---------|-------|--------------------|
+| "Time" text | Dark navy blue | `#1a2744` |
+| "Vision" text | Warm orange/gold | `#e8912d` |
+| "Media" text | Medium blue | `#2d6bc4` |
+| Clock frame | Gold gradient | `#c8882d` → `#e8b44d` |
+| Lens center | Steel blue/silver | `#4a6d8c` |
+| Tagline text | Medium gray | `#6b7280` |
 
 ---
 
