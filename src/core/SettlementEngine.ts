@@ -249,8 +249,9 @@ export class SettlementEngine {
   // ──────────────────────────────────────────────
   async previewCurrentMonth(): Promise<SettlementResult> {
     const now = new Date();
-    const monthStr = now.toISOString().slice(0, 7);
-    return this.calculateSettlement(monthStr);
+    const y = now.getUTCFullYear();
+    const m = String(now.getUTCMonth() + 1).padStart(2, '0');
+    return this.calculateSettlement(`${y}-${m}`);
   }
 
   // ──────────────────────────────────────────────

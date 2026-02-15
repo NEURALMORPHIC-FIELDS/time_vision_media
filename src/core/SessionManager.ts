@@ -16,7 +16,24 @@ import { config } from '../config/app.js';
 //
 // Zero dependency on streaming platforms.
 // All tracking is client-side countdown + server timestamp.
+//
+// TIMEZONE POLICY: All dates are UTC. The "accounting day" boundary
+// is UTC midnight. This means a user in CET (UTC+1) watching at
+// 00:30 local time has their session counted against the previous
+// UTC day. At monthly settlement granularity (±2h) this has zero
+// impact. For daily caps (16h) the worst case is a user getting
+// slightly more or less headroom at day boundaries — acceptable
+// since the cap exists to prevent abuse, not to bill precisely.
 // ============================================================
+
+/** Returns today's date as YYYY-MM-DD in UTC. */
+function utcDateString(): string {
+  const d = new Date();
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
 
 export interface Session {
   sessionId: string;
@@ -41,6 +58,11 @@ export interface SessionStopResult {
   platformName: string;
   durationSeconds: number;
   endReason: string;
+}
+
+export interface PlatformLiveStats {
+  platformId: number;
+  activeUsers: number;
 }
 
 export class SessionManager {
@@ -131,7 +153,8 @@ export class SessionManager {
     }
 
     const now = Math.floor(Date.now() / 1000);
-    const startedAt = parseInt(await redis.hGet(sessionKey, 'startedAt') || '0', 10);
+    const rawStartedAt = await redis.hGet(sessionKey, 'startedAt');
+    const startedAt = parseInt(rawStartedAt ?? '0', 10);
     const durationSec = now - startedAt;
 
     // Check session cap (6 hours)
@@ -200,8 +223,8 @@ export class SessionManager {
       ],
     );
 
-    // Update daily aggregate
-    const today = new Date().toISOString().slice(0, 10);
+    // Update daily aggregate (UTC day boundary — see TIMEZONE POLICY above)
+    const today = utcDateString();
     await query(
       `INSERT INTO daily_traffic (date, user_id, platform_id, total_seconds, session_count)
        VALUES ($1, $2, $3, $4, 1)
@@ -270,7 +293,7 @@ export class SessionManager {
   // How many seconds user has consumed today
   // ──────────────────────────────────────────────
   async getDailySeconds(userId: number): Promise<number> {
-    const today = new Date().toISOString().slice(0, 10);
+    const today = utcDateString();
     const val = await redis.hGet(`daily:${userId}:${today}`, 'total_sec');
     return val ? parseInt(val, 10) : 0;
   }
@@ -279,9 +302,9 @@ export class SessionManager {
   // GET LIVE PLATFORM STATS
   // How many users are active on each platform NOW
   // ──────────────────────────────────────────────
-  async getLivePlatformStats(): Promise<Array<{ platformId: number; activeUsers: number }>> {
+  async getLivePlatformStats(): Promise<PlatformLiveStats[]> {
     const platforms = await query<{ id: number }>('SELECT id FROM platforms WHERE active = true');
-    const stats = [];
+    const stats: PlatformLiveStats[] = [];
 
     for (const platform of platforms.rows) {
       const count = await redis.sCard(`platform:live:${platform.id}`);

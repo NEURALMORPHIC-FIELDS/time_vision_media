@@ -130,6 +130,124 @@ The countdown system is the heart of Time Vision Media. It tracks time without a
 4. **Volume anomaly**: >3x median flagged
 5. **Pattern anomaly**: Near-max usage for 3+ consecutive days flagged
 
+## Session Degradation & Reconciliation
+
+The countdown is an **estimation system**, not an exact measurement. Time Vision Media cannot observe what happens inside another platform's tab, app, or device. This section documents every degradation scenario and how the system handles it.
+
+### Web (Browser)
+
+| Scenario | What happens | Impact | Mitigation |
+|----------|-------------|--------|------------|
+| User closes browser tab | Heartbeat stops arriving | Session runs for up to 5 more minutes (timeout window) | HeartbeatWatchdog closes session with reason `timeout`. Max overcount: 300 seconds |
+| User puts tab in background | Page Visibility API may pause JS timers | Heartbeat may be delayed or skipped | Client should use `visibilitychange` event to send an immediate heartbeat on tab return. If missed for 5 min → timeout |
+| User loses network | Heartbeat requests fail silently | Session stays "alive" in Redis until timeout | Same as above — 5 min grace, then `timeout` |
+| Browser crashes / OS kill | No graceful shutdown possible | Session runs until TTL or watchdog catches it | Redis TTL (6h max) is the hard safety net. Watchdog (30s scan) catches it within 5 min |
+| User opens new tab to same platform | Two heartbeats for the same session? No — session is per-user, not per-tab | No duplication | `session:active:{userId}` is a single Redis hash. One user = one session |
+
+### Mobile (React Native)
+
+| Scenario | What happens | Impact | Mitigation |
+|----------|-------------|--------|------------|
+| App goes to background | iOS/Android suspend JS execution after ~30s | Heartbeat stops | App should send `stop` on `AppState.change` to `background`. If not: watchdog timeout (5 min) |
+| OS kills backgrounded app | No callback guaranteed | Same as browser crash | Watchdog timeout (5 min) + Redis TTL (6h) |
+| Poor connectivity (mobile data) | Heartbeats may fail intermittently | Session may timeout even though user is watching | 5-minute window is generous — typical mobile hiccup is <30s. If it exceeds 5 min, user likely isn't watching |
+| Device goes to sleep | App suspended | Heartbeat stops | Same as background — `stop` on sleep event, watchdog as fallback |
+
+### Orphan Session Cleanup
+
+Three layers of defense against stuck sessions:
+
+```
+Layer 1 — Client-side:
+  App sends POST /api/session/stop on:
+  • Tab close (beforeunload event)
+  • App background (AppState listener)
+  • User explicitly returns to hub
+
+Layer 2 — HeartbeatWatchdog (server-side):
+  Runs every 30 seconds
+  Scans all session:active:* keys in Redis
+  If lastHeartbeat > 5 minutes ago → stopSession(reason: 'timeout')
+
+Layer 3 — Redis TTL (hard safety net):
+  Every session key has a 6-hour TTL
+  If both client and watchdog fail, Redis auto-deletes the key
+  A daily reconciliation job (planned) can detect sessions
+  with no matching viewing_sessions row and generate alerts
+```
+
+### Accuracy Budget
+
+```
+Per session:
+  Start:     ±1 second  (server timestamp at redirect)
+  Heartbeat: ±60 seconds (heartbeat interval)
+  End:       ±300 seconds worst case (5 min timeout)
+  Typical:   ±60 seconds (client sends stop)
+
+Per day (10 sessions average):
+  Typical:   ±5 minutes
+  Worst:     ±50 minutes (all 10 sessions timeout — unlikely)
+
+Per month (30 days):
+  Typical:   ±2 hours
+  Worst:     ±25 hours (extreme — all sessions timeout every day)
+
+For settlement:
+  Monthly pool = millions of euros
+  ±2 hours out of ~100 hours/user/month = ~2% variance
+  At aggregate level (100k+ users), variance approaches zero
+  (overestimates and underestimates cancel out statistically)
+```
+
+### What This Means for Implementers
+
+1. **Do not market this as "real-time precision tracking"** — it is a robust estimation
+2. **Heartbeat interval (60s) is the fundamental resolution** — anything finer is false precision
+3. **The 5-minute timeout window is a design tradeoff**: shorter = more false timeouts from network glitches; longer = more overcount on genuine exits
+4. **Mobile is less reliable than web** — plan for higher timeout rates on mobile sessions
+5. **Settlement accuracy is acceptable** because it operates on monthly aggregates across thousands of users, where individual variances cancel out
+
+## Timezone Policy
+
+All server-side dates and timestamps use **UTC**.
+
+### Why UTC
+
+- Time Vision Media serves users across multiple timezones
+- UTC avoids ambiguity at daylight saving transitions
+- PostgreSQL stores `TIMESTAMPTZ` which is always UTC internally
+- Settlement runs at `00:05 UTC` on the 1st of each month — one consistent boundary
+
+### Where It Matters
+
+| Context | Boundary | Impact |
+|---------|----------|--------|
+| **Daily cap (16h)** | UTC midnight | A user in CET (UTC+1) watching at 00:30 local time has their session counted against the previous UTC day. Worst case: ±1-2 hours of headroom shift. Acceptable — the cap prevents abuse, not precise billing |
+| **Daily traffic aggregates** | UTC day | `daily_traffic` table groups by UTC date. Cross-timezone users see their daily stats aligned to UTC |
+| **Monthly settlement** | UTC month | Settlement aggregates entire UTC months. At this granularity, timezone is irrelevant (±2h out of 720h) |
+| **Anomaly detection** | UTC day | Pattern detection (3+ consecutive high-usage days) uses UTC days. No practical impact |
+
+### Implementation
+
+```typescript
+// CORRECT — explicit UTC date
+function utcDateString(): string {
+  const d = new Date();
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+// WRONG — depends on server locale, breaks in different environments
+const today = new Date().toISOString().slice(0, 10); // DON'T USE
+```
+
+### User-Facing Dates
+
+The **frontend** should convert UTC timestamps to the user's local timezone for display purposes only. The server never stores or calculates with local times.
+
 ## Settlement Process
 
 ```
